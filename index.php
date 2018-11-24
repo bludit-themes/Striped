@@ -1,59 +1,51 @@
-<!DOCTYPE HTML>
-<!--
-	Striped by HTML5 UP
-	html5up.net | @n33co
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
+<!DOCTYPE html>
 <html>
-	<head>
-		
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<?php include(PATH_THEME_PHP.'head.php') ?>
-	</head>
-	<body>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="author" content="Bludit CMS">
 
-		<!-- Content -->
-			<div id="content">
-				<div class="inner">
+	<!-- Dynamic title tag -->
+	<?php echo Theme::metaTags('title') ?>
 
-					
-			<?php
-			    if( ($Url->whereAmI()=='home') || ($Url->whereAmI()=='tag') )
-			    {
-			        include(PATH_THEME_PHP.'home.php');
-			    }
-			    elseif($Url->whereAmI()=='post')
-			    {
-			        include(PATH_THEME_PHP.'post.php');
-			    }
-			    elseif($Url->whereAmI()=='page')
-			    {
-			        include(PATH_THEME_PHP.'page.php');
-			    }
-			?>
+	<!-- Dynamic description tag -->
+	<?php echo Theme::metaTags('description') ?>
 
-				</div>
-			</div>
+	<!-- Include Favicon -->
+	<?php echo Theme::favicon('img/favicon.png') ?>
 
-		<!-- Copyright -->
-			<div id="sidebar">
-			
-			<?php include(PATH_THEME_PHP.'sidebar.php') ?></ul>
-				
-			</div>
+	<!-- Include CSS Styles from this theme -->
+	<?php echo Theme::css('assets/css/main.css') ?>
+	<?php echo Theme::css('assets/css/bludit.css') ?>
 
-		<!-- Scripts -->	
-		
-		<?php Theme::jquery() ?>
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+	<!-- Load plugins -->
+	<?php Theme::plugins('siteHead') ?>
+</head>
+<body class="is-preload">
 
-	</body>
+	<!-- Load plugins -->
+	<?php Theme::plugins('siteBodyBegin') ?>
+
+	<?php include(THEME_DIR_PHP.'sidebar.php') ?>
+
+	<!-- Content -->
+	<?php
+		if ($WHERE_AM_I == 'page') {
+			include(THEME_DIR_PHP.'page.php');
+		} else {
+			include(THEME_DIR_PHP.'home.php');
+		}
+	?>
+
+	<!-- Javascript -->
+	<?php echo Theme::jquery() ?>
+	<?php echo Theme::js('assets/js/browser.min.js') ?>
+	<?php echo Theme::js('assets/js/breakpoints.min.js') ?>
+	<?php echo Theme::js('assets/js/util.js') ?>
+	<?php echo Theme::js('assets/js/main.js') ?>
+
+	<!-- Load plugins -->
+	<?php Theme::plugins('siteBodyEnd') ?>
+
+</body>
 </html>
